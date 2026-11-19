@@ -2,7 +2,7 @@
 
 ## Thông tin nhóm
 
-- Tên nhóm (`TenNhom`, không dấu, không khoảng trắng):
+- Tên nhóm (`TenNhom`, không dấu, không khoảng trắng): NhomLeague
 - Lớp: `L3B`
 - Repo của bàn: `K5-L3B-DAY10-NhomLeague-PoCtoPilotGate1`
 - Thẻ sự cố đã bốc (S1–S8):
