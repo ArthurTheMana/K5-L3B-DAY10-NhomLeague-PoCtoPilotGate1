@@ -13,7 +13,7 @@ Họ tên đầy đủ và MSSV của **mọi** thành viên; thêm dòng nếu 
 
 | STT | Họ và tên | MSSV | Vai | Trưởng nhóm |
 | --: | --------- | ---- | --- | :---------: |
-|   1 | Nguyễn Tài Minh Huy | 2A202603828 | Kỹ sư cổng (Tạm thời) |  |
+|   1 | Nguyễn Tài Minh Huy | 2A202603828 | Sản phẩm và kinh doanh |  |
 |   2 | Hoàng Dường Anh Quân| 2A202603735 |     |             |
 |   3 |           |      |     |             |
 
