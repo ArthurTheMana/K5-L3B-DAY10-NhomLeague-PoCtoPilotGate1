@@ -24,10 +24,8 @@ def carrier_fault_missing_delivery_date_rate(trials):
     flagged = 0
     for trial in trials:
         events = trial.get("events") or []
-        if any(e.get("type") == "tracking" and any(
-            p.get("status") == "DELIVERED" and not p.get("delivered_date")
-            for p in e.get("parcels", [])
-        ) for e in events):
+        if any(e.get("type") == "guard" and e.get("kind") == "carrier_fault_missing_delivery_date"
+               for e in events):
             flagged += 1
     return flagged / max(1, len(trials))
 

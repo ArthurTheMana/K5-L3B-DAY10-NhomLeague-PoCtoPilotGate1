@@ -2,12 +2,12 @@
 
 *Đây là kết quả TỰ KIỂM TRA của bàn, không phải điểm. Bài được một team chấm tự động chấm lại sau buổi học.*
 
-- Mã lần chạy: `R-S1-grade-20261119-214125-f5f130` · bàn: `K5-L3B-DAY10-NhomLeague-PoCtoPilotGate1` · grader `lab10-1.0` · 0.867s
-- Ba mốc: base `R-S1-before-20261119-214126-f5f130` · prepared `R-S1-prepared-20261119-214126-f5f130` · after `R-S1-after-20261119-214126-f5f130` (report + trace trong runs/)
-- Mốc prepared (cổng vòng 1): CHƯA DÙNG ĐƯỢC: bản chốt vòng 1 ĐÃ BỊ SỬA sau khi chốt
-- Hash code đội (guards + monitors + switches + cổng vận hành): `f5f130d1802c`
+- Mã lần chạy: `R-S1-grade-20261119-222255-427bb7` · bàn: `K5-L3B-DAY10-NhomLeague-PoCtoPilotGate1` · grader `lab10-1.0` · 0.773s
+- Ba mốc: base `R-S1-before-20261119-222255-427bb7` · prepared `R-S1-prepared-20261119-222255-427bb7` · after `R-S1-after-20261119-222256-427bb7` (report + trace trong runs/)
+- Mốc prepared (cổng vòng 1): đã chốt `1f03ce85`, còn nguyên
+- Hash code đội (guards + monitors + switches + cổng vận hành): `427bb7cbb980`
 - Hash Bản tiêu chí chấp nhận: `e88a53d48ac0` · đã ký: `e88a53d48ac0` · KHÔNG ĐỔI
-- Thẻ đang kiểm: `S1` · dòng "Thẻ đã bốc" bàn ghi trong phiếu: (trống) · chưa ghi (ghi đúng số đã bốc vào dòng `Thẻ đã bốc:` ở đầu `templates/form-c-incident.md`)
+- Thẻ đang kiểm: `S1` · dòng "Thẻ đã bốc" bàn ghi trong phiếu: S1 · khớp
 
 | Kiểm | Kết quả | Chi tiết |
 |---|---|---|
@@ -16,7 +16,7 @@
 | 3 visible | ❌ | base có vấn đề: True; after sạch: False; ticket còn hỏng: ['S1-07@11', 'S1-07@22', 'S1-07@33', 'S1-07@44', 'S1-07@55']; trần còn vượt: không |
 | 4 hidden | — | máy này không có bài kiểm tra ẩn (team chấm sẽ chạy sau buổi học) |
 | 5 regression | ✅ | bộ nền pass_rate 0.9909 → 1.0; ca mới hỏng: không |
-| 6 monitor | ❌ | metric mới: ['carrier_fault_missing_delivery_date_rate']; sáng đèn: không |
+| 6 monitor | ✅ | metric mới: ['carrier_fault_missing_delivery_date_rate']; sáng đèn: [('carrier_fault_missing_delivery_date_rate', 'after', 0.0, 0.153846)] |
 
 **Kinh doanh · vận hành · pháp lý trên gói sự cố bàn nhìn thấy** (tiền tính cho một ngày giả lập)
 

@@ -1,8 +1,8 @@
 {
- "run_id": "R-S1-grade-20261119-214125-f5f130",
+ "run_id": "R-S1-grade-20261119-222255-427bb7",
  "incident": "S1",
  "grader_version": "lab10-1.0",
- "code_hash": "f5f130d1802c59123992c2146da80f919438c99ea5f754be34b329c0b7cea02e",
+ "code_hash": "427bb7cbb9806bbd1556aa635ae5def8ac52d6e781e58ec4b03130b7db51c2fc",
  "integrity": {
   "ok": false,
   "changed": [
@@ -42,14 +42,16 @@
  },
  "team": "K5-L3B-DAY10-NhomLeague-PoCtoPilotGate1",
  "drawn_card": {
-  "recorded": {},
-  "status": "chưa ghi"
+  "recorded": {
+   "templates/form-c-incident.md": "S1"
+  },
+  "status": "khớp"
  },
  "checkpoint": {
-  "ok": false,
+  "ok": true,
   "taken": true,
   "hash": "1f03ce856394b167541fc3d0102e7279fb1fca4d91074c0582d87576b11491c2",
-  "problem": "bản chốt vòng 1 ĐÃ BỊ SỬA sau khi chốt",
+  "problem": null,
   "taken_at": "2026-11-19T14:37:09"
  },
  "before": {
@@ -1206,7 +1208,7 @@
    },
    "monitors": {
     "escalation_rate": 0.153846,
-    "carrier_fault_missing_delivery_date_rate": 0.0
+    "carrier_fault_missing_delivery_date_rate": 0.153846
    },
    "by_segment": {
     "warehouse": [
@@ -1308,9 +1310,9 @@
   }
  },
  "run_ids": {
-  "before": "R-S1-before-20261119-214126-f5f130",
-  "prepared": "R-S1-prepared-20261119-214126-f5f130",
-  "after": "R-S1-after-20261119-214126-f5f130"
+  "before": "R-S1-before-20261119-222255-427bb7",
+  "prepared": "R-S1-prepared-20261119-222255-427bb7",
+  "after": "R-S1-after-20261119-222256-427bb7"
  },
  "visible": {
   "before_red": true,
@@ -1336,11 +1338,18 @@
   "prepared_newly_failed": []
  },
  "monitor": {
-  "ok": false,
+  "ok": true,
   "new": [
    "carrier_fault_missing_delivery_date_rate"
   ],
-  "lit": [],
+  "lit": [
+   {
+    "name": "carrier_fault_missing_delivery_date_rate",
+    "stage": "after",
+    "base": 0.0,
+    "incident": 0.153846
+   }
+  ],
   "errors": []
  },
  "hidden": {
@@ -1364,10 +1373,10 @@
   "visible": false,
   "hidden": null,
   "regression": true,
-  "monitor": false
+  "monitor": true
  },
  "hard_gates_ok": false,
  "score": null,
  "verdict": "FAIL",
- "seconds": 0.867
+ "seconds": 0.773
 }
