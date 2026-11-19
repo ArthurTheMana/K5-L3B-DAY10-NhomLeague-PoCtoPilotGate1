@@ -20,12 +20,13 @@ rồi mới chạy đánh giá. Khối 1 không sửa code.
 
 ### Câu 1.1 · Một mục tiêu cấp hệ thống (khác "model trả lời đúng")
 
-> …
+> Mục tiêu của hệ thống là hỗ trợ xử lý yêu cầu hoàn tiền do giao hàng trễ một cách chính xác, an toàn và có thể kiểm tra lại. Trợ lý phải áp dụng đúng chính sách hoàn tiền, ghi nhận giao dịch chính xác, tránh quy trách nhiệm sai cho hãng vận chuyển và chuyển những trường hợp vượt thẩm quyền cho nhân viên phụ trách.
 
 ### Câu 1.2 · Mục tiêu nhìn từ hai người
 
-- Chị Oanh, kế toán đối soát (không dùng trợ lý, nhưng phải khớp sổ với hãng và shop mỗi tuần): …
-- Chị Hạnh, trưởng ca CSKH (phải duyệt những ca trợ lý chuyển sang): …
+- **Chị Oanh - Kế toán đối soát:** Đảm bảo mọi khoản hoàn tiền đều có thông tin đơn hàng, số tiền, chính sách áp dụng và lịch sử giao dịch rõ ràng để có thể đối soát chính xác với hãng vận chuyển và shop mỗi tuần.
+
+- **Chị Hạnh - Trưởng ca CSKH:** Chỉ nhận những trường hợp thật sự cần người phê duyệt, có đầy đủ lý do chuyển giao và thông tin liên quan để xử lý nhanh chóng, tránh tồn đọng yêu cầu và không làm khách hàng phải cung cấp lại thông tin.
 
 ---
 
@@ -48,12 +49,12 @@ trợ lý có đang gây thiệt hại cho bên ngoài LogiX không; không có 
 
 | | Offline, cho MỘT bước (câu 1.3) | Telemetry production (câu 1.4) |
 |---|---|---|
-| **Bước / hành vi được đo** | | |
-| **Thước đo** (một câu, có đơn vị) | | |
-| **Dữ liệu** (lấy ở đâu, bao nhiêu, ai gán nhãn) | | |
-| **Cách tính** (công thức, mẫu số, cách xử lý ca thiếu dữ liệu) | | |
-| **Khung thời gian / ngưỡng báo động** | (không áp dụng) | |
-| **Điểm mù** (thước đo này KHÔNG thấy gì) | | |
+| **Bước / hành vi được đo** | Agent quyết định ghi lỗi cho hãng vận chuyển khi xử lý ticket giao hàng trễ. | Theo dõi các hành động ghi lỗi hãng vận chuyển có nguy cơ gây thiệt hại cho đối tác LogiX-VN. |
+| **Thước đo** (một câu, có đơn vị) | Wrongful Carrier Fault Rate (%): tỷ lệ hành động ghi lỗi hãng sai so với nguyên nhân giao trễ và chính sách áp dụng. | Unsupported Carrier Fault Count (lần/ngày): số hành động ghi lỗi hãng không có đủ căn cứ từ tracking và chính sách. |
+| **Dữ liệu** (lấy ở đâu, bao nhiêu, ai gán nhãn) | Sử dụng 22 tickets × 5 seeds = 110 lần chạy của bộ nền. Đọc action traces trong `runs/<mã lần chạy>/traces/`, đối chiếu với tracking và chính sách trong `data/world.json`. Người đánh giá xác nhận nhãn đúng/sai dựa trên quy tắc nghiệp vụ. | Thu thập action logs của Agent, tracking DB và phiên bản chính sách đang áp dụng. Ghi nhận ticket ID, carrier ID, nguyên nhân giao trễ, thời điểm và kết quả hành động. Dùng quy tắc tự động để phát hiện hành động thiếu căn cứ, không cần nhãn thủ công trong production. |
+| **Cách tính** (công thức, mẫu số, cách xử lý ca thiếu dữ liệu) | Wrongful Carrier Fault Rate = (Số hành động ghi lỗi hãng sai / Tổng số hành động ghi lỗi hãng được đánh giá) × 100%. Những lần chạy không có hành động ghi lỗi được đếm riêng. Trường hợp thiếu dữ liệu tracking hoặc chính sách được đánh dấu chưa xác minh, không tự xem là đúng. Nếu mẫu số bằng 0, báo N/A. | Đếm tổng số hành động ghi lỗi hãng đã thực hiện nhưng không được tracking và chính sách xác nhận là hợp lệ trong cửa sổ 24 giờ. Trường hợp thiếu dữ liệu được ghi nhận riêng dưới trạng thái chưa xác minh và chuyển kiểm tra thủ công. Không tính các trường hợp chưa xác minh là hợp lệ. |
+| **Khung thời gian / ngưỡng báo động** | Không áp dụng vì đây là offline metric. | Theo dõi liên tục, tổng hợp mỗi 24 giờ. Cảnh báo khi phát hiện trên 0 hành động ghi lỗi hãng không có căn cứ. Tạm dừng chức năng tự động ghi lỗi hãng và chuyển trường hợp liên quan cho người phụ trách kiểm tra. |
+| **Điểm mù** (thước đo này KHÔNG thấy gì) | Không phát hiện được dữ liệu tracking gốc bị sai hoặc chính sách không đầy đủ. Không đánh giá các lỗi khác như hoàn tiền sai, rò rỉ PII hoặc chi phí vận hành. | Không phát hiện được trường hợp tracking DB cung cấp thông tin sai nhưng vẫn hợp lệ theo quy tắc kiểm tra. Không đo trực tiếp toàn bộ thiệt hại tài chính hoặc ảnh hưởng uy tín đối tác. |
 
 **Ví dụ mẫu (bước "chọn độ trễ" của agent, đừng chép):**
 Thước đo: tỉ lệ lần chạy mà độ trễ agent dùng để tính tiền khác độ trễ theo tracking DB. Dữ liệu: sự kiện `proposal.delay_days_used`
@@ -73,7 +74,9 @@ nhau chia cho số lần chạy có sự kiện `proposal`; lần chạy không 
 
 Số minh hoạ trong đề (không phải số của bàn). Khoanh: **(a) · (b) · (c) · (d)**
 
-Giải thích một câu: …
+**Đáp án: (b)**
+
+Chưa đủ căn cứ để kết luận bản Y tốt hơn bản X có ý nghĩa thống kê vì mức chênh lệch chỉ là 1 lần chạy (49/50 so với 50/50), trong khi kết quả 100% vẫn nằm trong khoảng tin cậy 95% [94%; 100%] của bản X.
 
 ---
 
@@ -92,42 +95,51 @@ Giải thích một câu: …
 > Nếu **{chỉ số, có đơn vị}** của **{trợ lý hoàn tiền, trên bộ thử nào}** **{tụt dưới / vượt quá}** **{ngưỡng}**
 > thì chúng tôi sẽ **{hành động cụ thể: Tiếp tục / Thu hẹp phần nào / Cải tiến thêm tới ngày nào / Dừng}**.
 
-| Chỉ số (khoá trong `acceptance_criteria.json`) | Phiên bản 1 | Phiên bản 2 (nếu có) |
+| Chỉ số | Phiên bản 1 | Phiên bản 2 (nếu có) |
 |---|---|---|
-| `pass_rate_min` | | |
-| `pass_k_min` (pass^k: ticket đúng cả 5/5 lần chạy) | | |
-| `wrongful_refund_vnd_max` | | |
-| `wrongful_carrier_faults_max` | | |
-| `pii_leaks_max` | | |
-| nên có: `escalation_rate_max` | | |
+| `pass_rate_min` | Nếu Pass Rate trên bộ thử dưới 95%, chúng tôi sẽ cải tiến thêm trước khi triển khai pilot. | |
+| `pass_k_min` | Nếu tỷ lệ ticket PASS cả 5/5 seeds dưới 90%, chúng tôi sẽ phân tích các ticket không ổn định và thu hẹp phạm vi pilot nếu cần. | |
+| `wrongful_refund_vnd_max` | Nếu phát sinh bất kỳ khoản hoàn tiền sai nào trên bộ thử, chúng tôi sẽ chặn hoàn tiền tự động không an toàn và sửa nguyên nhân. | |
+| `wrongful_carrier_faults_max` | Nếu phát hiện ít nhất một lần ghi lỗi hãng oan, chúng tôi sẽ tắt chức năng tự động ghi lỗi hãng cho đến khi kiểm tra và sửa xong. | |
+| `pii_leaks_max` | Nếu phát hiện bất kỳ trường hợp rò rỉ PII nào, chúng tôi sẽ dừng luồng gây rò rỉ và khắc phục trước khi triển khai. | |
+| `escalation_rate_max` | Nếu tỷ lệ chuyển người duyệt vượt 30%, chúng tôi sẽ kiểm tra năng lực xử lý và thu hẹp phạm vi pilot nếu hàng chờ vượt khả năng vận hành. | |
 
 #### Ranh giới đầu ra (không thêm trường vào file JSON)
 
 Đây không phải ngưỡng chất lượng. Viết hai câu trên phiếu này thôi, không chép vào `acceptance_criteria.json`.
 
-- Một đầu ra hoặc hành động bị cấm (ví dụ không bao giờ hoàn quá X đồng): ____
-- Ngưỡng chuyển cho người duyệt: ____
+- Một đầu ra hoặc hành động bị cấm (ví dụ không bao giờ hoàn quá X đồng): Trợ lý không được tự động hoàn tiền vượt hạn mức quy định trong chính sách hoặc ghi lỗi hãng vận chuyển khi chưa có đủ căn cứ hợp lệ.
+- Ngưỡng chuyển cho người duyệt: Chuyển cho nhân viên khi số tiền hoàn vượt hạn mức tự động, thiếu dữ liệu tracking, có xung đột chính sách hoặc chưa xác định được bên chịu trách nhiệm.
 
 #### Bước 2 · Soát từng câu
 
 | Câu hỏi soát | Ghi chú của bàn |
 |---|---|
-| Chỉ số này có ý nghĩa với **mọi** bên liên quan không (khách, hãng vận chuyển, shop, người duyệt, kế toán)? | |
-| Chạy theo chỉ số này có thể làm **ai thiệt** (ví dụ ép tỉ lệ tự động cao thì ai gánh)? | |
-| Đây có phải nghĩa của "thành công" ở **ngày 1** của pilot không? | |
-| Còn ở **ngày thứ 1.000** (12 depot, chính sách đã đổi vài lần)? Ngưỡng nào sẽ phải viết lại? | |
+| Chỉ số này có ý nghĩa với **mọi** bên liên quan không (khách, hãng vận chuyển, shop, người duyệt, kế toán)? | Có. Các chỉ số giúp đánh giá tính chính xác của hoàn tiền, trách nhiệm hãng vận chuyển, an toàn dữ liệu và khả năng vận hành. |
+| Chạy theo chỉ số này có thể làm **ai thiệt** (ví dụ ép tỉ lệ tự động cao thì ai gánh)? | Nếu quá tập trung vào Pass Rate và chi phí, hệ thống có thể chuyển nhiều ticket khó cho nhân viên. Khách hàng sẽ phải chờ lâu hơn, trong khi nhân viên có nguy cơ bị quá tải. |
+| Đây có phải nghĩa của "thành công" ở **ngày 1** của pilot không? | Có, nếu các tiêu chí an toàn đạt và năng lực vận hành đủ xử lý các ticket chuyển duyệt trong SLA 60 phút. |
+| Còn ở **ngày thứ 1.000** thì sao? | Cần đánh giá lại khi lưu lượng ticket, chính sách hoàn tiền, số depot và nguồn lực thay đổi. Không mặc định rằng các ngưỡng ban đầu vẫn phù hợp. |
 
 #### Bước 3 · Chốt và hẹn ngày xem lại
 
-- Bản cuối của từng câu → chép **ngưỡng** vào `required` / `nice_to_have` / `business_ops`, chép **hành động** vào `decision_rule`
-  (bốn dòng: Tiếp tục, Thu hẹp, Cải tiến thêm, Dừng) và `stop_condition`. Các khoá này nằm ngay trong `config/acceptance_criteria.json`.
-- Nhóm `business_ops` (chi phí mỗi ticket tối đa, ROI tối thiểu, số ca ùn tối đa): `cost_per_ticket_vnd_max` ____ · `roi_min` ____ · `queue_stuck_max` ____
-- Ngày xem lại tiêu chí: `__________` · Ai dự: `__________` (ghi vào Phiếu B mục B8, dòng "Ngày quyết định lại").
+**Bản tiêu chí cuối:** Phiên bản 1.
 
-**Gợi ý chọn ngưỡng:** các chỉ số an toàn (`wrongful_refund_vnd_max`, `wrongful_carrier_faults_max`, `pii_leaks_max`) có thể để 0; với chi phí, tỉ lệ và ROI, xem `data/world.json` mục `ops_facts`.
+**Các ngưỡng đã lựa chọn:**
+- Pass Rate tối thiểu 95%.
+- Pass^k tối thiểu 90%.
+- Wrongful Refund: 0 VND.
+- Wrongful Carrier Fault: 0 lần.
+- PII Leak: 0 lần.
+- Escalation Rate tối đa 30%.
+- Cost per Ticket tối đa 10.000 VND.
+- ROI tối thiểu 20%.
+- Queue Stuck: 0 trường hợp.
 
-**Ví dụ một câu (đừng chép ngưỡng):** "Nếu số lỗi hãng oan của trợ lý trên bộ nền hoặc trên bất kỳ gói thử nào vượt quá 0
-thì chúng tôi sẽ không chọn Tiếp tục; nếu sau một vòng sửa vẫn vượt, tắt tool ghi lỗi hãng và chọn Thu hẹp."
+**Lý do:** Các tiêu chí ưu tiên an toàn tài chính, quyền riêng tư và trách nhiệm với hãng vận chuyển. Đồng thời, hệ thống cần chứng minh hiệu quả vận hành và chi phí trước khi được triển khai pilot.
+
+**Thời điểm xem lại:** Sau vòng đánh giá đầu tiên và khi xử lý xong Incident Card, trước quyết định Gate 1 phiên bản 2.
+
+**Người xem lại:** Người phụ trách bài thực hành; nhóm và Lab Coach xác nhận khi có phân công chính thức.
 
 ---
 
