@@ -23,57 +23,47 @@ Ghi `members` trong `submission/submission.json` theo dạng `"HoVaTen-MSSV"`, k
 
 Mỗi thành viên tự viết một mục bên dưới (chép mẫu, đổi tiêu đề thành họ tên không dấu và MSSV, ví dụ `## NguyenVanAn-20241234`).
 
-## Nguyễn Tài Minh Huy - 2A202603828
+## NguyenTaiMinhHuy-2A202603828
 
 ### Phần việc phụ trách
 
-Hiện tại mình phụ trách thực hiện CP1 và CP2 của Lab 10.
+Mình phụ trách chính thực hiện hai checkpoint đầu tiên của Lab 10, gồm thiết lập môi trường thực hành (CP1) và xây dựng, ký tiêu chí chấp nhận (CP2).
 
 #### CP1 - Cài đặt và chia vai
 
-Tạo repository bằng GitHub Template theo hướng dẫn ban đầu.
+Mình tạo repository bằng chức năng GitHub Template theo hướng dẫn ban đầu của Lab. Sau đó, mình clone repository về máy, cấu hình Git identity và thiết lập hai remote origin, upstream để quản lý source code.
 
-Clone repository về máy tính.
-
-Thiết lập Git identity và các remote origin, upstream.
-
-Kiểm tra môi trường Python và chạy unit tests.
-
-Đồng bộ những thay đổi mới từ repository của giảng viên.
+Mình chạy bộ unit tests nhằm kiểm tra môi trường Python và các chức năng có sẵn. Khi giảng viên cập nhật repository, mình đồng bộ những file cần thiết và chạy lại các kiểm tra để bảo đảm hệ thống vẫn hoạt động bình thường.
 
 #### CP2 - Ký tiêu chí (Phiếu A)
 
-Hoàn thiện các câu 1.1–1.6 trong templates/form-a-criteria.md.
+Mình hoàn thành các câu 1.1–1.6 trong templates/form-a-criteria.md, bao gồm:
 
-Xác định mục tiêu hệ thống và các bên liên quan.
+- Xác định mục tiêu hệ thống AI Refund Assistant và nhu cầu của các bên liên quan.
 
-Thiết kế Offline Metric và Production Telemetry.
+- Thiết kế Offline Metric và Production Telemetry để đánh giá hành vi ghi lỗi hãng vận chuyển.
 
-Phân tích kết quả có khoảng tin cậy 95%.
+- Phân tích kết quả minh họa có khoảng tin cậy 95%.
 
-Thiết lập Acceptance Criteria, các ngưỡng an toàn và quy tắc quyết định Gate 1.
+- Xây dựng Acceptance Criteria với các ngưỡng chất lượng, an toàn và vận hành.
 
-Điền config/acceptance_criteria.json.
+- Thiết lập quy tắc quyết định Gate 1 và điều kiện dừng.
 
-Ký tiêu chí trước Evaluation, xác minh chữ ký và push lên GitHub.
+- Điền config/acceptance_criteria.json và ký tiêu chí trước khi chạy Evaluation.
+
+Sau khi ký, mình xác minh chữ ký, commit và push các file lên GitHub. Mình giữ nguyên Acceptance Criteria đã ký trong quá trình đồng bộ các thay đổi tiếp theo.
 
 ### Đóng góp cụ thể
 
-- Thiết lập môi trường thực hành Day 10 và kiểm tra kết nối GitHub.
-
-- Chạy thành công 13/13 unit tests.
-
-- Hoàn thiện Phiếu A với các nội dung A1–A5.
-
-- Thiết lập các ngưỡng chất lượng, an toàn và vận hành cho AI Refund Assistant.
-
-- Ký Acceptance Criteria, tạo file lock và xác minh chữ ký hợp lệ.
-
-- Commit và push các file liên quan đến CP2.
-
-- Cập nhật tài liệu và công cụ Lab theo những thay đổi mới từ giảng viên.
-
-- Chạy lại unit tests và kiểm tra chữ ký sau khi cập nhật, bảo đảm các kiểm tra vẫn thành công.
+| Checkpoint | Công việc | Kết quả |
+|---|---|---|
+| CP1 | Thiết lập GitHub repository và Git identity | Hoàn thành |
+| CP1 | Clone repository, cấu hình remote và đồng bộ cập nhật | Hoàn thành |
+| CP1 | Chạy Python unit tests | 13/13 PASS |
+| CP2 | Hoàn thiện Phiếu A (A1–A5) | Đã điền |
+| CP2 | Thiết lập Acceptance Criteria | Đã ký |
+| CP2 | Xác minh tính toàn vẹn của tiêu chí | `ok: true` |
+| CP2 | Kiểm tra Git history và push bằng chứng | Checker trả về `True`, đã push |
 
 ### Bằng chứng
 
@@ -81,11 +71,12 @@ Ký tiêu chí trước Evaluation, xác minh chữ ký và push lên GitHub.
 
 - Các commit:
 
-de8c1ab: Sign Gate 1 acceptance criteria.
-
-5f6f534: Hoàn thiện bằng chứng ký trong Phiếu A.
-
-c18d831: Đồng bộ các cập nhật Day 10 từ giảng viên.
+| Commit | Nội dung |
+|---|---|
+| `de8c1ab` | Ký Acceptance Criteria ban đầu |
+| `5f6f534` | Hoàn thiện bằng chứng ký trong Phiếu A |
+| `c18d831` | Đồng bộ cập nhật từ repository giảng viên |
+| `ae95834` | Commit bổ sung đúng tên theo yêu cầu Git history checker, không thay đổi file tiêu chí |
 
 - Kết quả kiểm tra:
 
@@ -109,11 +100,15 @@ config/acceptance_criteria.lock
 
 #### Một điều mình học được:
 
-Qua CP1 và CP2, mình hiểu rằng việc xây dựng một AI Agent không chỉ dừng ở việc hệ thống chạy được hoặc trả lời đúng. Trước khi triển khai thực tế, cần xác định rõ các tiêu chí đánh giá về chất lượng, bảo mật, chi phí và rủi ro. Mình cũng hiểu được vì sao Acceptance Criteria phải được ký trước khi chạy Evaluation, tránh việc thay đổi ngưỡng dựa trên kết quả đã biết.
+Qua CP1 và CP2, mình hiểu rõ hơn sự khác biệt giữa một AI Agent chạy được trong môi trường thử nghiệm và một hệ thống đủ điều kiện triển khai thực tế.
+
+Trước khi đánh giá, cần xác định rõ hệ thống phải đạt những tiêu chí nào, những rủi ro nào không được chấp nhận và cần làm gì khi kết quả không đạt. Việc ký Acceptance Criteria trước Evaluation cũng giúp quá trình đánh giá minh bạch hơn vì không thể tùy ý thay đổi ngưỡng sau khi đã nhìn thấy kết quả.
 
 #### Một điều mình còn chưa chắc:
 
-Mình vẫn cần hiểu rõ hơn cách lựa chọn các ngưỡng Acceptance Criteria sao cho phù hợp với dữ liệu và điều kiện vận hành thực tế. Đặc biệt, mình muốn tìm hiểu thêm cách kết hợp Pass Rate, Pass^k và các chỉ số an toàn để quyết định một AI Agent đã sẵn sàng cho Pilot hay chưa.
+Mình vẫn chưa thật sự tự tin trong việc lựa chọn các ngưỡng Acceptance Criteria phù hợp với điều kiện vận hành thực tế. Chẳng hạn, Pass Rate 95% có đủ tốt hay không còn phụ thuộc vào mức độ nghiêm trọng của các lỗi và khả năng kiểm soát rủi ro.
+
+Mình cũng muốn hiểu rõ hơn cách kết hợp Pass Rate, Pass^k, Safety Metrics và chi phí vận hành để đưa ra quyết định Go/No-go có căn cứ, thay vì chỉ dựa vào một chỉ số riêng lẻ.
 
 ## HoVaTen-MSSV
 
