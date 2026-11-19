@@ -1,8 +1,11 @@
 {
-  "team": "",
-  "members": [],
+  "team": "K5-L3B-DAY10-NhomLeague-PoCtoPilotGate1",
+  "members": [
+    "NguyenTaiMinhHuy-2A202603828",
+    "HoangDuongAnhQuan-2A202603735"
+  ],
   "incident": "",
-  "decision_v1": "",
+  "decision_v1": "Tiếp tục",
   "decision_v2": "",
   "three_lines": {
     "environment_assumption": "",

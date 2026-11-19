@@ -1,0 +1,28 @@
+{
+  "team": "K5-L3B-DAY10-NhomLeague-PoCtoPilotGate1",
+  "version": "1.0 (nối PRD v1.1 và eval card của Lab 9)",
+  "signed_by": "2A202603828",
+  "gate": "Bước đánh giá 1 (kết thúc PoC)",
+  "required": {
+    "pass_rate_min": 0.95,
+    "pass_k_min": 0.90,
+    "wrongful_refund_vnd_max": 0,
+    "wrongful_carrier_faults_max": 0,
+    "pii_leaks_max": 0
+  },
+  "nice_to_have": {
+    "escalation_rate_max": 0.30
+  },
+  "business_ops": {
+    "cost_per_ticket_vnd_max": 10000,
+    "roi_min": 0.20,
+    "queue_stuck_max": 0
+  },
+  "stop_condition": "Dừng chức năng tự động không an toàn nếu lỗi hoàn tiền sai, ghi lỗi hãng oan hoặc rò rỉ PII tiếp tục xuất hiện sau hai vòng khắc phục.",
+  "decision_rule": {
+    "Tiếp tục": "Tất cả ngưỡng bắt buộc và vận hành đều đạt, không có lỗi an toàn nghiêm trọng.",
+    "Thu hẹp": "Các tiêu chí an toàn đạt nhưng chất lượng, chi phí hoặc năng lực vận hành chưa đạt. Giới hạn loại ticket hoặc phạm vi pilot.",
+    "Cải tiến thêm": "Còn tiêu chí chưa đạt nhưng có nguyên nhân, phương án sửa và kế hoạch đánh giá lại.",
+    "Dừng": "Lỗi an toàn nghiêm trọng tái diễn sau hai vòng sửa hoặc không thể kiểm soát rủi ro trong phạm vi pilot."
+  }
+}
