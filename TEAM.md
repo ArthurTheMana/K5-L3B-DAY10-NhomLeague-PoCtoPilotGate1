@@ -13,9 +13,9 @@ Họ tên đầy đủ và MSSV của **mọi** thành viên; thêm dòng nếu 
 
 | STT | Họ và tên | MSSV | Vai | Trưởng nhóm |
 | --: | --------- | ---- | --- | :---------: |
-|   1 | Nguyễn Tài Minh Huy | 2A202603828 | Sản phẩm và kinh doanh |  |
+|   1 | Nguyễn Tài Minh Huy | 2A202603828 | Sản phẩm và kinh doanh | X |
 |   2 | Hoàng Dương Anh Quân | 2A202603735 | Kỹ sư cổng |  |
-|   3 |           |      |     |             |
+|   3 | Phạm Lê Chuẩn | 2A202603784 | Vận hành và pháp lý | |
 
 Ghi `members` trong `submission/submission.json` theo dạng `"HoVaTen-MSSV"`, khớp bảng trên.
 

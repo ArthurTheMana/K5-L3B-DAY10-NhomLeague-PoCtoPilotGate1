@@ -77,6 +77,12 @@ def write_gate(ctx, action):
             return Verdict.deny("đơn hàng đã có giao dịch hoàn tiền trong sổ cái")
 
         parcel = H.ticket_parcel(order, ctx.ticket, ctx.as_of)
+        # Tracking records marked DELIVERED must carry a delivery date. Without it,
+        # db_delay_days falls back to today's date and can invent a carrier strike.
+        if parcel.get("status") == "DELIVERED" and not parcel.get("delivered_date"):
+            ctx.log("carrier_fault_missing_delivery_date", order_id=order["order_id"],
+                    parcel_id=parcel["parcel_id"], status=parcel.get("status"))
+            return Verdict.escalate("tracking không nhất quán: kiện đã giao nhưng thiếu ngày giao; cần Ops xác minh")
         db_delay = H.db_delay_days(parcel, ctx.as_of)
         cause = parcel.get("delay_cause")
         expected = H.entitlement_vnd(pol, order, db_delay, cause)

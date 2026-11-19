@@ -19,7 +19,21 @@ def escalation_rate(trials):
     return sum(t["status"] == "escalated" for t in trials) / max(1, len(trials))
 
 
+def carrier_fault_missing_delivery_date_rate(trials):
+    """Share of tickets whose carrier fault write was blocked on incomplete tracking."""
+    flagged = 0
+    for trial in trials:
+        events = trial.get("events") or []
+        if any(e.get("type") == "tracking" and any(
+            p.get("status") == "DELIVERED" and not p.get("delivered_date")
+            for p in e.get("parcels", [])
+        ) for e in events):
+            flagged += 1
+    return flagged / max(1, len(trials))
+
+
 MONITORS = {
     "escalation_rate": escalation_rate,     # có sẵn; KHÔNG tính là metric mới của đội
+    "carrier_fault_missing_delivery_date_rate": carrier_fault_missing_delivery_date_rate,
 }
 STARTER_MONITORS = ("escalation_rate",)
